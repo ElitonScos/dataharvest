@@ -9,17 +9,17 @@ High-performance concurrent web scraper built in Rust. Submit scraping jobs via 
 ```
 POST /api/v1/jobs  (url + CSS selectors)
         ↓
-PostgreSQL — job persisted (status: pending)
+PostgreSQL - job persisted (status: pending)
         ↓
-Tokio Worker Pool — picks up pending jobs
+Tokio Worker Pool - picks up pending jobs
         ↓
-reqwest — fetches page with connection pooling
+reqwest - fetches page with connection pooling
         ↓
-scraper — extracts fields via CSS selectors
+scraper - extracts fields via CSS selectors
         ↓
-PostgreSQL — results stored as JSONB
+PostgreSQL - results stored as JSONB
         ↓
-GET /api/v1/jobs/:id — retrieve structured data
+GET /api/v1/jobs/:id - retrieve structured data
 ```
 
 ---
@@ -27,11 +27,11 @@ GET /api/v1/jobs/:id — retrieve structured data
 ## Tech Stack
 
 - **Rust 1.78** + **Tokio** async runtime
-- **Axum** — ergonomic async HTTP framework
-- **reqwest** — async HTTP client with connection pooling
-- **scraper** — HTML parsing with CSS selector support
-- **sqlx** — compile-time checked async PostgreSQL queries
-- **PostgreSQL 16** — JSONB result storage
+- **Axum** - ergonomic async HTTP framework
+- **reqwest** - async HTTP client with connection pooling
+- **scraper** - HTML parsing with CSS selector support
+- **sqlx** - compile-time checked async PostgreSQL queries
+- **PostgreSQL 16** - JSONB result storage
 - **Docker** + **Docker Compose**
 
 ---
@@ -109,16 +109,16 @@ GET /api/v1/jobs/{id}
 ```
 dataharvest/
 ├── src/
-│   ├── main.rs          — Axum server, Tokio worker loop, wiring
-│   ├── config.rs        — env-based configuration
-│   ├── models.rs        — domain types, request/response structs
-│   ├── scraper.rs       — HTML fetching and CSS extraction
+│   ├── main.rs          - Axum server, Tokio worker loop, wiring
+│   ├── config.rs        - env-based configuration
+│   ├── models.rs        - domain types, request/response structs
+│   ├── scraper.rs       - HTML fetching and CSS extraction
 │   └── routes/
-│       └── jobs.rs      — job endpoints
+│       └── jobs.rs      - job endpoints
 ├── migrations/
 │   └── 001_init.sql
 ├── docker/
-│   └── Dockerfile       — multi-stage: rust builder → debian slim
+│   └── Dockerfile       - multi-stage: rust builder → debian slim
 ├── docker-compose.yml
 └── .env.example
 ```
